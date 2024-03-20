@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>513</width>
+    <height>310</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>481</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="Name">
+       <property name="font">
+        <font>
+         <pointsize>25</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>ЛР 2 “Методы уточнения корней</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="sepLine2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="Author">
+       <property name="text">
+        <string>Автор: Евграфов Фёдор ИУ7-25Б</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="Variant">
+       <property name="text">
+        <string>Вариант - 8</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="sepLine1">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="Functions">
+       <property name="text">
+        <string>Доступные математические функции:</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
