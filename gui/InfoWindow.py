@@ -60,7 +60,7 @@ class InfoUI(QMainWindow):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.Name.setText(_translate("MainWindow", "ЛР 2 “Методы уточнения корней"))
+        self.Name.setText(_translate("MainWindow", 'ЛР 2 \n“Методы уточнения корней"'))
         self.Author.setText(_translate("MainWindow", "Автор: Евграфов Фёдор ИУ7-25Б"))
         self.Variant.setText(_translate("MainWindow", "Вариант - 8"))
         self.Functions.setText(_translate("MainWindow", "Доступные математические функции:"))
