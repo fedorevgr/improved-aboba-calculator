@@ -39,6 +39,13 @@ class CalculatorUI(QMainWindow):
         self._add_names()
         QtCore.QMetaObject.connectSlotsByName(self)
 
+    # def _create_sep_line(self):
+    #     self.sepLine1 = QtWidgets.QFrame(self.verticalLayoutWidget)
+    #     self.sepLine1.setFrameShape(QtWidgets.QFrame.HLine)
+    #     self.sepLine1.setFrameShadow(QtWidgets.QFrame.Sunken)
+    #     self.sepLine1.setObjectName("sepLine1")
+    #     self.UI.addWidget(self.sepLine1)
+
     def _add_main_widget(self):
         self.mainWidget = QtWidgets.QWidget(self)
         self.mainWidget.setObjectName("mainWidget")
@@ -236,4 +243,5 @@ class CalculatorUI(QMainWindow):
         self.epsLabel.setText(_translate("MainWindow", "Точность:"))
         self.epsEdit.setText(_translate("MainWindow", "eps"))
         self.computeButton.setText(_translate("MainWindow", "Вычислить"))
+        self.Menu.setText(_translate("MainWindow", "Меню"))
 
