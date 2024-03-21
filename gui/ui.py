@@ -12,6 +12,8 @@ from PyQt5.QtCore import Qt
 from PyQt5 import QtGui, QtWidgets, QtCore
 from PyQt5.QtWidgets import QApplication, QLabel, QShortcut, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLineEdit, QGridLayout
 
+from src import Settings
+
 
 class CalculatorUI(QMainWindow):
 

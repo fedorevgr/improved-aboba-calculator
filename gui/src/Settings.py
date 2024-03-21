@@ -31,5 +31,13 @@ class SettingsEdit(QLineEdit):
 
 
 class ComputeButton(QPushButton):
-    def __init__(self, parent: QPushButton):
-        ...
+    def __init__(self, parent: QWidget):
+        self.__FONT = _create_font(20)
+
+        super().__init__(parent)
+
+        self.setMinimumSize(QtCore.QSize(40, 40))
+        self.setFont(self.__FONT)
+        self.setIconSize(QtCore.QSize(16, 20))
+        self.setObjectName("computeButton")
+
