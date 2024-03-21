@@ -13,12 +13,15 @@ from PyQt5 import QtGui, QtWidgets, QtCore
 from PyQt5.QtWidgets import QApplication, QLabel, QShortcut, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLineEdit, QGridLayout
 
 from gui.src import Settings
+from gui.src import InfoWindow
 
 
 class CalculatorUI(QMainWindow):
 
     def __init__(self):
         self.SETTINGS_FONT = self._create_font(20)
+
+        self._info_window = InfoWindow.InfoUI()
 
         super().__init__()
         self.setObjectName("MainWindow")
@@ -40,13 +43,6 @@ class CalculatorUI(QMainWindow):
 
         self._add_names()
         QtCore.QMetaObject.connectSlotsByName(self)
-
-    # def _create_sep_line(self):
-    #     self.sepLine1 = QtWidgets.QFrame(self.verticalLayoutWidget)
-    #     self.sepLine1.setFrameShape(QtWidgets.QFrame.HLine)
-    #     self.sepLine1.setFrameShadow(QtWidgets.QFrame.Sunken)
-    #     self.sepLine1.setObjectName("sepLine1")
-    #     self.UI.addWidget(self.sepLine1)
 
     def _add_main_widget(self):
         self.mainWidget = QtWidgets.QWidget(self)
@@ -174,6 +170,8 @@ class CalculatorUI(QMainWindow):
         self.Menu = QtWidgets.QPushButton(self.mainWidget)
         self.Menu.setGeometry(QtCore.QRect(0, 0, 100, 32))
         self.Menu.setObjectName("Menu")
+        self.Menu.clicked.connect(self._info_window.show)
+
 
     @classmethod
     def _create_font(cls, size: int = 13, Bold: bool = False, Italic: bool = False) -> QtGui.QFont:
