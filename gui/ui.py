@@ -137,11 +137,11 @@ class CalculatorUI(QMainWindow):
         self.settingsBox.addWidget(self.leftBoundEdit)
 
     def _add_right_bound_label(self):
-        self.rigthBoundLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.rigthBoundLabel.setFont(self.SETTINGS_FONT)
-        self.rigthBoundLabel.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft)
-        self.rigthBoundLabel.setObjectName("rigthBoundLabel")
-        self.settingsBox.addWidget(self.rigthBoundLabel)
+        self.rightBoundLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.rightBoundLabel.setFont(self.SETTINGS_FONT)
+        self.rightBoundLabel.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft)
+        self.rightBoundLabel.setObjectName("rigthBoundLabel")
+        self.settingsBox.addWidget(self.rightBoundLabel)
 
     def _add_right_bound_edit(self):
         self.rightBoundEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
@@ -234,7 +234,7 @@ class CalculatorUI(QMainWindow):
         self.functionEditLine.setText(_translate("MainWindow", "Function(x)"))
         self.leftBoundLabel.setText(_translate("MainWindow", "Левая граница:"))
         self.leftBoundEdit.setText(_translate("MainWindow", "граница"))
-        self.rigthBoundLabel.setText(_translate("MainWindow", "Правая граница:"))
+        self.rightBoundLabel.setText(_translate("MainWindow", "Правая граница:"))
         self.rightBoundEdit.setText(_translate("MainWindow", "граница"))
         self.stepLabel.setText(_translate("MainWindow", "Шаг:"))
         self.stepEdit.setText(_translate("MainWindow", "шаг"))

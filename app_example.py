@@ -1,8 +1,7 @@
 from PyQt5.QtWidgets import QApplication
 
-from sys import version, argv, exit
+from sys import argv, exit
 from gui.ui import CalculatorUI
-from gui.InfoWindow import InfoUI
 
 
 def main():
