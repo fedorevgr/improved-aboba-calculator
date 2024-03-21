@@ -15,8 +15,8 @@ class SettingLabel(QLabel):
         self.__FONT = _create_font(20)
 
         super().__init__(parent)
-        self.setFont(self.SETTINGS_FONT)
-        self.maxIterLabel.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft)
+        self.setFont(self.__FONT)
+        self.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft)
         self.setObjectName(name)
 
 

@@ -12,7 +12,7 @@ from PyQt5.QtCore import Qt
 from PyQt5 import QtGui, QtWidgets, QtCore
 from PyQt5.QtWidgets import QApplication, QLabel, QShortcut, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLineEdit, QGridLayout
 
-from src import Settings
+from gui.src import Settings
 
 
 class CalculatorUI(QMainWindow):
@@ -114,93 +114,47 @@ class CalculatorUI(QMainWindow):
         self.plotAndSettingsBox.addLayout(self.settingsBox)
 
     def _add_left_bound_label(self):
-        self.leftBoundLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.leftBoundLabel.setFont(self.SETTINGS_FONT)
-        self.leftBoundLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.leftBoundLabel.setTextFormat(QtCore.Qt.AutoText)
-        self.leftBoundLabel.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft)
-        self.leftBoundLabel.setObjectName("leftBoundLabel")
+        self.leftBoundLabel = Settings.SettingLabel("leftBoundLabel", self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.leftBoundLabel)
 
     def _add_left_bound_edit(self):
-        self.leftBoundEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.leftBoundEdit.sizePolicy().hasHeightForWidth())
-
-        self.leftBoundEdit.setSizePolicy(sizePolicy)
-        self.leftBoundEdit.setMinimumSize(QtCore.QSize(0, 0))
-        self.leftBoundEdit.setMaximumSize(QtCore.QSize(1600, 16777215))
-
-        self.leftBoundEdit.setFont(self.SETTINGS_FONT)
-        self.leftBoundEdit.setObjectName("leftBoundEdit")
+        self.leftBoundEdit = Settings.SettingsEdit("leftBoundEdit", self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.leftBoundEdit)
 
     def _add_right_bound_label(self):
-        self.rightBoundLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.rightBoundLabel.setFont(self.SETTINGS_FONT)
-        self.rightBoundLabel.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft)
-        self.rightBoundLabel.setObjectName("rigthBoundLabel")
+        self.rightBoundLabel = Settings.SettingLabel("rightBoundLabel", self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.rightBoundLabel)
 
     def _add_right_bound_edit(self):
-        self.rightBoundEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        self.rightBoundEdit.setMaximumSize(QtCore.QSize(1600, 16777215))
-        self.rightBoundEdit.setFont(self.SETTINGS_FONT)
-        self.rightBoundEdit.setObjectName("rightBoundEdit")
+        self.rightBoundEdit = Settings.SettingsEdit("rightBoundEdit", self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.rightBoundEdit)
 
     def _add_step_label(self):
-        self.stepLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.stepLabel.setFont(self.SETTINGS_FONT)
-        self.stepLabel.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft)
-        self.stepLabel.setObjectName("stepLabel")
+        self.stepLabel = Settings.SettingLabel("stepLabel", self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.stepLabel)
 
     def _add_step_edit(self):
-        self.stepEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        self.stepEdit.setMaximumSize(QtCore.QSize(1600, 16777215))
-        self.stepEdit.setFont(self.SETTINGS_FONT)
-        self.stepEdit.setObjectName("stepEdit")
+        self.stepEdit = Settings.SettingsEdit("stepEdit", self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.stepEdit)
 
     def _add_max_iter_label(self):
-        self.maxIterLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.maxIterLabel.setFont(self.SETTINGS_FONT)
-        self.maxIterLabel.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft)
-        self.maxIterLabel.setObjectName("maxIterLabel")
+        self.maxIterLabel = Settings.SettingLabel("maxIterLabel", self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.maxIterLabel)
 
     def _add_max_iter_edit(self):
-        self.maxIterEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        self.maxIterEdit.setMaximumSize(QtCore.QSize(1600, 16777215))
-        self.maxIterEdit.setFont(self.SETTINGS_FONT)
-        self.maxIterEdit.setObjectName("maxIterEdit")
+        self.maxIterEdit = Settings.SettingsEdit("maxIterEdit", self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.maxIterEdit)
 
     def _add_eps_label(self):
-        self.epsLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.epsLabel.setFont(self.SETTINGS_FONT)
-        self.epsLabel.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft)
-        self.epsLabel.setObjectName("epsLabel")
+        self.epsLabel = Settings.SettingLabel("epsLabel", self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.epsLabel)
 
     def _add_eps_edit(self):
-        self.epsEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        self.epsEdit.setFont(self.SETTINGS_FONT)
-        self.epsEdit.setObjectName("epsEdit")
+        self.epsEdit = Settings.SettingsEdit("epsEdit", self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.epsEdit)
 
     def _add_compute_button(self):
-        self.computeButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.computeButton.setMinimumSize(QtCore.QSize(40, 40))
-        self.computeButton.setFont(self.SETTINGS_FONT)
-        self.computeButton.setIconSize(QtCore.QSize(16, 20))
-        self.computeButton.setDefault(False)
-        self.computeButton.setFlat(False)
-        self.computeButton.setObjectName("computeButton")
+        self.computeButton = Settings.ComputeButton(self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.computeButton)
 
     def _add_plot_space(self):
