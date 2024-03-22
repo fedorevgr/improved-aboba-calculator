@@ -16,6 +16,11 @@ class OperatorEnding(Exception):
                          f'{expression}\n{"^":~>{len(expression)}}')
 
 
+class ParseError(Exception):
+    def __init__(self, expression, where):
+        super().__init__(f"Unknown token: {expression}\n{'^':~>{where}}")
+
+
 class ExpectedError(Exception):
     def __init__(self, expression, expectation, where):
         super().__init__(f"Expected {expectation}, \n{expression}\n{'^':~>{where}}{'':~^{len(expression) - where}}")
@@ -26,6 +31,6 @@ class EmptyExpression(Exception):
         super().__init__("Empty expression")
 
 
-
+ParseExceptions = (ParseError, OperatorEnding, ExpectedError, EmptyExpression, NoArgsException, NoClosureBracket)
 
 

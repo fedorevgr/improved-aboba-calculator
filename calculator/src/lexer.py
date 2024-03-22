@@ -175,12 +175,11 @@ class Lexer:
             self._index = index
             self._current_char = char
 
-            for_error = self._state
+            if self._state is None:
+                self._reset()
+                raise ParseError(expression, where=index)
 
             self._state = self._machine[self._state]()
-
-            if self._state is None:
-                raise ExpectedError(expression, self._expectations[for_error], where=index)
 
         if self._state not in 'IBX':
             raise NoArgsException(expression)
@@ -212,6 +211,6 @@ class Lexer:
 
         out = self._result.copy()
 
-        # self._reset()
+        self._reset()
 
         return out

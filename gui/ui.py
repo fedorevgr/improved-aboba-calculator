@@ -18,6 +18,7 @@ from gui.src import InfoWindow
 class CalculatorUI(QMainWindow):
 
     def __init__(self):
+
         self.SETTINGS_FONT = self._create_font(20)
 
         self._info_window = InfoWindow.InfoUI()
@@ -42,6 +43,7 @@ class CalculatorUI(QMainWindow):
 
         self._add_names()
         QtCore.QMetaObject.connectSlotsByName(self)
+
 
     def _add_main_widget(self):
         self.mainWidget = QtWidgets.QWidget(self)

@@ -19,6 +19,6 @@ class Interface:
 
         self.solver.set_equation(self._function)
 
-    def solve(self, x) -> float:
+    def solve(self, x: float) -> float:
         return self.solver.F(x)
 

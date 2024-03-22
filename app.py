@@ -12,7 +12,8 @@ from gui.src import Filter
 
 class App(Interface, CalculatorUI):
     def __init__(self):
-        super().__init__()
+        Interface.__init__(self)
+        CalculatorUI.__init__(self)
 
         self._edits = {
             "functionEditLine": self.functionEditLine,
@@ -31,31 +32,31 @@ class App(Interface, CalculatorUI):
             "eps": 0.0
         }
 
-        self.computeButton.clicked.connect(self._on_compute_pressed())
+        self.computeButton.clicked.connect(self._on_compute_pressed)
 
     def _check_values(self):
         self.set_expression(self.functionEditLine.text())
 
         for name in ["leftBoundEdit", "rightBoundEdit", "stepEdit", "epsEdit"]:
-            self._parameters[name[:-4]] = Filter.check_float(self._edit[name], name)
+            self._parameters[name[:-4]] = Filter.check_float(self._edits[name].text(), name)
 
-        self._parameters["maxIter"] = Filter.check_int(self.maxIterEdit, "maxIterEdit")
+        self._parameters["maxIter"] = Filter.check_int(self.maxIterEdit.text(), "maxIterEdit")
 
     def _on_compute_pressed(self):
         for edit in self._edits.values():
-            edit.setStyleSheet("color: black;")
+            edit.setStyleSheet("color: black; border: 1px solid black;")
 
         try:
             self._check_values()
-        except InvalidNumber as exception:
-            self._edits[exception].setStyleSheet("color: red;")
-        except exceptions.EmptyExpression:
-            pass
-        except exceptions.NoClosureBracket:
-            pass
-        except exceptions.OperatorEnding:
-            pass
+        except InvalidNumber as setting_exception:
+            self._edits[setting_exception.type].setStyleSheet("color: red; border: 1px solid red;")
+        except exceptions.ParseExceptions as func_exception:
+            self.functionEditLine.setStyleSheet("color: red; border: 1px solid red;")
+            func_exception.message = str(func_exception)
+
+
 def main():
+
     app = QApplication(argv)
     calc = App()
     calc.show()
