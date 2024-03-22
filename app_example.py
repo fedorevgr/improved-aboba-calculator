@@ -7,7 +7,6 @@ from gui.ui import CalculatorUI
 def main():
     app = QApplication(argv)
     calc = CalculatorUI()
-    # calc = InfoUI()
     calc.show()
     exit(app.exec_())
 

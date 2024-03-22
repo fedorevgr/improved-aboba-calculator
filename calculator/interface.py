@@ -4,7 +4,6 @@ from calculator.src.solver import Equation
 
 
 class Interface:
-
     def __init__(self):
         self.lexer = Lexer()
         self.converter = Converter()
