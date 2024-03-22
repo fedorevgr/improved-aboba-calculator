@@ -44,7 +44,6 @@ class CalculatorUI(QMainWindow):
         self._add_names()
         QtCore.QMetaObject.connectSlotsByName(self)
 
-
     def _add_main_widget(self):
         self.mainWidget = QtWidgets.QWidget(self)
         self.mainWidget.setObjectName("mainWidget")
@@ -86,7 +85,7 @@ class CalculatorUI(QMainWindow):
 
         self._add_settings_box()
 
-        self._add_plot_space()
+        # self._add_plot_space()
 
         self.UI.addLayout(self.plotAndSettingsBox)
 
@@ -134,7 +133,6 @@ class CalculatorUI(QMainWindow):
         self.stepEdit = Settings.SettingsEdit("stepEdit", self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.stepEdit)
 
-
     def _add_max_iter_label(self):
         self.maxIterLabel = Settings.SettingLabel("maxIterLabel", self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.maxIterLabel)
@@ -142,7 +140,6 @@ class CalculatorUI(QMainWindow):
     def _add_max_iter_edit(self):
         self.maxIterEdit = Settings.SettingsEdit("maxIterEdit", self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.maxIterEdit)
-
 
     def _add_eps_label(self):
         self.epsLabel = Settings.SettingLabel("epsLabel", self.verticalLayoutWidget)
@@ -156,13 +153,12 @@ class CalculatorUI(QMainWindow):
         self.computeButton = Settings.ComputeButton(self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.computeButton)
 
-
-    def _add_plot_space(self):
-        self.plotSpace = QtWidgets.QListWidget(self.verticalLayoutWidget)
-        self.plotSpace.setMinimumSize(QtCore.QSize(490, 0))  # prev value 600
-        self.plotSpace.setBaseSize(QtCore.QSize(0, 0))
-        self.plotSpace.setObjectName("plotSpace")
-        self.plotAndSettingsBox.addWidget(self.plotSpace)
+    # def _add_plot_space(self):
+    #     self.plotSpace = QtWidgets.QListWidget(self.verticalLayoutWidget)
+    #     self.plotSpace.setMinimumSize(QtCore.QSize(490, 0))  # prev value 600
+    #     self.plotSpace.setBaseSize(QtCore.QSize(0, 0))
+    #     self.plotSpace.setObjectName("plotSpace")
+    #     self.plotAndSettingsBox.addWidget(self.plotSpace)
 
     def _add_solutions_list(self):
         self.solutionsList = QtWidgets.QListView(self.verticalLayoutWidget)
