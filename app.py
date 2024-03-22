@@ -3,7 +3,7 @@ from sys import argv
 
 from calculator.interface import Interface
 
-from plotter.show import Shower
+from plotter.show import Canvas
 
 from gui.ui import CalculatorUI
 
@@ -18,7 +18,9 @@ class App(Interface, CalculatorUI):
         Interface.__init__(self)
         CalculatorUI.__init__(self)
 
-        self.drawer = Shower()
+        self.plot = Canvas()
+
+        self.plotAndSettingsBox.addWidget(self.plot)
 
         self._edits = {
             "functionEditLine": self.functionEditLine,
@@ -53,8 +55,8 @@ class App(Interface, CalculatorUI):
 
         try:
             self._check_values()
-            self.drawer.set_args(self._parameters["leftBound"], self._parameters["rightBound"], self.solver.F)
-            self.drawer.show()
+            self.plot.show(self._parameters["leftBound"], self._parameters["rightBound"], function=self.solver.F)
+
         except InvalidNumber as setting_exception:
             self._edits[setting_exception.type].setStyleSheet("color: red; border: 1px solid red;")
         except exceptions.ParseExceptions as func_exception:

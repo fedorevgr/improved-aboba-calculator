@@ -1,4 +1,4 @@
-from matplotlib import pyplot as plt
+
 from plotter.analyzer import Space
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
@@ -13,17 +13,30 @@ from matplotlib.figure import Figure
 #     self.plotAndSettingsBox.addWidget(self.plotSpace)
 
 
-class Shower(FigureCanvasQTAgg):
+class Canvas(FigureCanvasQTAgg, Space):
     def __init__(self):
-        super().__init__()
-        self.fig, self.ax = plt.subplots()
-        self.ax.grid()
+        self.fig = Figure(figsize=(5, 5), dpi=100)
+        self.axes = self.fig.add_subplot(111)
+        FigureCanvasQTAgg.__init__(self, self.fig)
+
+        Space.__init__(self)
+
+    def show(self, *bounds,  function: callable, points: tuple[float] = None) -> None:
+        self.set_args(*bounds,  function)
+        self.add_points()
+        self.axes.grid(True)
+        self.draw()
 
     def set_args(self, l_bound, r_bound,  function):
+        self.axes.cla()
         self.set_values(l_bound, r_bound,  function)
 
-        self.ax.plot(self._space, self._values)
+        self.axes.axis("equal")
 
-    @classmethod
-    def show(cls):
-        plt.show()
+        self.axes.plot(self._space, self._values)
+
+    def add_points(self):
+        self.axes.scatter((0, 0), (1, 2), c="r", marker="o")
+
+
+
