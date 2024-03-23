@@ -138,7 +138,7 @@ class Equation(Arithmetics):
             prev_value = self._find_value_of(segments[i - 1])
 
             if curr_value * prev_value <= 0:
-                points_of_interest.append(((segments[i-1], prev_value), (current_segment, curr_value)))
+                points_of_interest.append((current_segment, curr_value))
 
         return points_of_interest
 
@@ -146,10 +146,22 @@ class Equation(Arithmetics):
     def get_derivative(cls, function):
         x = Symbol("x")
         derivative = sympify(Derivative(sympify(function)))
-        print(derivative)
+        return lambda _x: derivative.evalf(subs={x: _x})
 
-    def find_solution(self, left_bound, right_bound, simple_segment, start_expression):
+    def __iterate(self, point: tuple, eps, max_iter, func: callable, der: callable) -> float:
+        ...
+
+    def find_solution(self, left_bound, right_bound, simple_segment, eps, max_iter, func_source: str, func: callable = None):
+        if func is None:
+            func = self.F
+
+        derivative = self.get_derivative(func_source)
+
         segments = self._find_segments(left_bound, right_bound, simple_segment)
+
+        solutions = [0.0] * len(segments)
+        for i, segment in enumerate(segments):
+            solutions[i] = self.__iterate(segment, eps, max_iter, func, derivative)
 
 
 
