@@ -5,14 +5,6 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 
 
-# def _add_plot_space(self):
-#     self.plotSpace = QtWidgets.QListWidget(self.verticalLayoutWidget)
-#     self.plotSpace.setMinimumSize(QtCore.QSize(490, 0))  # prev value 600
-#     self.plotSpace.setBaseSize(QtCore.QSize(0, 0))
-#     self.plotSpace.setObjectName("plotSpace")
-#     self.plotAndSettingsBox.addWidget(self.plotSpace)
-
-
 class Canvas(FigureCanvasQTAgg, Space):
     def __init__(self):
         self.fig = Figure(figsize=(5, 5), dpi=100)
@@ -21,9 +13,9 @@ class Canvas(FigureCanvasQTAgg, Space):
 
         Space.__init__(self)
 
-    def show(self, *bounds,  function: callable, points: tuple[float] = None) -> None:
+    def show(self, *bounds,  function: callable, x, y) -> None:
         self.set_args(*bounds,  function)
-        self.add_points()
+        self.add_points(x, y, "r")
         self.axes.grid(True)
         self.draw()
 
@@ -35,8 +27,8 @@ class Canvas(FigureCanvasQTAgg, Space):
 
         self.axes.plot(self._space, self._values)
 
-    def add_points(self):
-        self.axes.scatter((0, 0), (1, 2), c="r", marker="o")
+    def add_points(self, x, y, col: str):
+        self.axes.scatter(x, y, c=col, marker="o")
 
 
 

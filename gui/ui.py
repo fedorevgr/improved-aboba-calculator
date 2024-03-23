@@ -13,6 +13,7 @@ from PyQt5.QtWidgets import QMainWindow
 
 from gui.src import Settings
 from gui.src import InfoWindow
+from gui.src import Listing
 
 
 class CalculatorUI(QMainWindow):
@@ -153,17 +154,8 @@ class CalculatorUI(QMainWindow):
         self.computeButton = Settings.ComputeButton(self.verticalLayoutWidget)
         self.settingsBox.addWidget(self.computeButton)
 
-    # def _add_plot_space(self):
-    #     self.plotSpace = QtWidgets.QListWidget(self.verticalLayoutWidget)
-    #     self.plotSpace.setMinimumSize(QtCore.QSize(490, 0))  # prev value 600
-    #     self.plotSpace.setBaseSize(QtCore.QSize(0, 0))
-    #     self.plotSpace.setObjectName("plotSpace")
-    #     self.plotAndSettingsBox.addWidget(self.plotSpace)
-
     def _add_solutions_list(self):
-        self.solutionsList = QtWidgets.QListView(self.verticalLayoutWidget)
-        self.solutionsList.setMaximumSize(QtCore.QSize(16777215, 200))
-        self.solutionsList.setObjectName("solutionsList")
+        self.solutionsList = Listing.ListWidget(self.verticalLayoutWidget)
         self.UI.addWidget(self.solutionsList)
 
     def _add_menu_button(self):
@@ -171,7 +163,6 @@ class CalculatorUI(QMainWindow):
         self.Menu.setGeometry(QtCore.QRect(0, 0, 100, 32))
         self.Menu.setObjectName("Menu")
         self.Menu.clicked.connect(self._info_window.show)
-
 
     @classmethod
     def _create_font(cls, size: int = 13, Bold: bool = False, Italic: bool = False) -> QtGui.QFont:

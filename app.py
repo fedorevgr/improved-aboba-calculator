@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QTableWidgetItem
 from sys import argv
 
 from calculator.interface import Interface
@@ -49,13 +49,40 @@ class App(Interface, CalculatorUI):
 
         self._parameters["maxIter"] = Filter.check_int(self.maxIterEdit.text(), "maxIterEdit")
 
+    def _draw_table(self, solutions):
+        # self.solutionsList.setup(("№", "Отрезок", "x", "f(x)", "Итер.", "Ошибка"))
+        self.solutionsList.setColumnCount(6)
+        self.solutionsList.setHorizontalHeaderLabels(("№", "Отрезок", "x", "f(x)", "Итер.", "Ошибка"))
+        self.solutionsList.setRowCount(len(solutions))
+
+        for row, solution in enumerate(solutions):
+            self.solutionsList.setItem(row, 0, QTableWidgetItem(f"{row + 1}"))
+            self.solutionsList.setItem(row, 1, QTableWidgetItem(solution[0]))
+            for col in range(1, 5):
+                self.solutionsList.setItem(row, col + 1, QTableWidgetItem(f"{solution[col]:g}"))
+
     def _on_compute_pressed(self):
+        self.solutionsList.clear()
         for edit in self._edits.values():
             edit.setStyleSheet("color: black; border: 1px solid black;")
 
         try:
             self._check_values()
-            self.plot.show(self._parameters["leftBound"], self._parameters["rightBound"], function=self.solver.F)
+            solutions = self.solver.find_solution(
+                self._parameters["leftBound"],
+                self._parameters["rightBound"],
+                self._parameters["step"],
+                self._parameters["eps"],
+                self._parameters["maxIter"],
+                self.functionEditLine.text()
+            )
+            self.plot.show(
+                self._parameters["leftBound"], self._parameters["rightBound"],
+                function=self.solver.F,
+                x=[x[1] for x in solutions],
+                y=[x[2] for x in solutions]
+            )
+            self._draw_table(solutions)
 
         except InvalidNumber as setting_exception:
             self._edits[setting_exception.type].setStyleSheet("color: red; border: 1px solid red;")

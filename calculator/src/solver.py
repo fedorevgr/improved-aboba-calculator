@@ -2,7 +2,10 @@ from math import sin, cos, tan, log2, log, e
 
 from numpy import arange
 
-from sympy import sympify, Derivative, Symbol
+
+
+from calculator.src.solutiononist import *
+
 EPS = 1e-8
 
 
@@ -134,35 +137,32 @@ class Equation(Arithmetics):
 
         segments = arange(left_bound, right_bound, simple_segment)
         for i, current_segment in enumerate(segments):
+            if i == 0:
+                continue
+
             curr_value = self._find_value_of(current_segment)
             prev_value = self._find_value_of(segments[i - 1])
 
             if curr_value * prev_value <= 0:
-                points_of_interest.append((current_segment, curr_value))
+                points_of_interest.append((segments[i - 1], (current_segment, curr_value)))
 
         return points_of_interest
 
-    @classmethod
-    def get_derivative(cls, function):
-        x = Symbol("x")
-        derivative = sympify(Derivative(sympify(function)))
-        return lambda _x: derivative.evalf(subs={x: _x})
-
-    def __iterate(self, point: tuple, eps, max_iter, func: callable, der: callable) -> float:
-        ...
-
-    def find_solution(self, left_bound, right_bound, simple_segment, eps, max_iter, func_source: str, func: callable = None):
+    def find_solution(self,
+                      left_bound,
+                      right_bound,
+                      simple_segment,
+                      eps, max_iter,
+                      func_source: str, func: callable = None):
         if func is None:
             func = self.F
 
-        derivative = self.get_derivative(func_source)
+        derivative = get_derivative(func_source)
 
         segments = self._find_segments(left_bound, right_bound, simple_segment)
 
-        solutions = [0.0] * len(segments)
+        solutions = [("", 0.0, 0.0, 0, 0)] * len(segments)
         for i, segment in enumerate(segments):
-            solutions[i] = self.__iterate(segment, eps, max_iter, func, derivative)
-
-
-
+            solutions[i] = iterate(*segment, eps, max_iter, func, derivative)
+        return solutions
 
