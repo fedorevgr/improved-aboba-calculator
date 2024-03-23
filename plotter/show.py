@@ -13,9 +13,12 @@ class Canvas(FigureCanvasQTAgg, Space):
 
         Space.__init__(self)
 
-    def show(self, *bounds,  function: callable, x, y) -> None:
+    def show(self, *bounds,  function: callable, x, y, x_e, y_e) -> None:
         self.set_args(*bounds,  function)
+
         self.add_points(x, y, "r")
+        self.add_points(x_e, y_e, "b")
+
         self.axes.grid(True)
         self.draw()
 

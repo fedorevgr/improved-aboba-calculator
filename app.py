@@ -51,21 +51,11 @@ class App(Interface, CalculatorUI):
 
     def _draw_table(self, solutions):
 
-        self.solutionsList.setColumnCount(5)
-        self.solutionsList.setHorizontalHeaderLabels(("Отрезок", "x", "f(x)", "Итер.", "Ошибка"))
-
-        self.solutionsList.setColumnWidth(0, self.solutionsList.SEGMENT_WIDTH)
-        self.solutionsList.setColumnWidth(1, self.solutionsList.FLOAT_WIDTH)
-        self.solutionsList.setColumnWidth(2, self.solutionsList.FLOAT_WIDTH)
-        self.solutionsList.setColumnWidth(3, self.solutionsList.INT_WIDTH)
-        self.solutionsList.setColumnWidth(4, self.solutionsList.INT_WIDTH)
-
-        self.solutionsList.setRowCount(len(solutions))
-        self.solutionsList.setVerticalHeaderLabels([str(x) for x in range(1, len(solutions) + 1)])
+        self.setup(len(solutions))
 
         for row, solution in enumerate(solutions):
             self.solutionsList.setItem(row, 0, QTableWidgetItem(solution[0]))
-            error =  solution[-1] > 0
+            error = solution[-1] > 0
             for col in range(1, 5):
                 if error and 1 <= col <= 2:
                     continue
@@ -86,11 +76,18 @@ class App(Interface, CalculatorUI):
                 self._parameters["maxIter"],
                 self.functionEditLine.text()
             )
+            extreme_points = self.solver.extreme_points(
+                self._parameters["leftBound"],
+                self._parameters["rightBound"],
+                self.functionEditLine.text()
+            )
             self.plot.show(
                 self._parameters["leftBound"], self._parameters["rightBound"],
                 function=self.solver.F,
                 x=[x[1] for x in solutions],
-                y=[x[2] for x in solutions]
+                y=[x[2] for x in solutions],
+                x_e=extreme_points[0],
+                y_e=extreme_points[1]
             )
             self._draw_table(solutions)
 
@@ -99,6 +96,19 @@ class App(Interface, CalculatorUI):
         except exceptions.ParseExceptions as func_exception:
             self.functionEditLine.setStyleSheet("color: red; border: 1px solid red;")
             func_exception.message = str(func_exception)
+
+    def setup(self, rows):
+        self.solutionsList.setColumnCount(5)
+        self.solutionsList.setHorizontalHeaderLabels(("Отрезок", "x", "f(x)", "Итер.", "Ошибка"))
+
+        self.solutionsList.setColumnWidth(0, self.solutionsList.SEGMENT_WIDTH)
+        self.solutionsList.setColumnWidth(1, self.solutionsList.FLOAT_WIDTH)
+        self.solutionsList.setColumnWidth(2, self.solutionsList.FLOAT_WIDTH)
+        self.solutionsList.setColumnWidth(3, self.solutionsList.INT_WIDTH)
+        self.solutionsList.setColumnWidth(4, self.solutionsList.INT_WIDTH)
+
+        self.solutionsList.setRowCount(rows)
+        self.solutionsList.setVerticalHeaderLabels([str(x) for x in range(1, rows + 1)])
 
 
 def main():

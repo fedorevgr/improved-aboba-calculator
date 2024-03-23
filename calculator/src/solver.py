@@ -1,7 +1,6 @@
 from math import sin, cos, tan, log2, log, e
 
-from numpy import arange
-
+from numpy import arange, linspace
 
 
 from calculator.src.solutiononist import *
@@ -165,4 +164,23 @@ class Equation(Arithmetics):
         for i, segment in enumerate(segments):
             solutions[i] = iterate(*segment, eps, max_iter, func, derivative)
         return solutions
+
+    def extreme_points(self, left_bound, right_bound, func_source: str):
+        ITERS = 10000
+        epsilon = 0.01
+
+        derivative = get_derivative(func_source)
+        mode = False
+
+        output_x, output_y = [], []
+        for point in linspace(left_bound, right_bound, ITERS):
+            if abs(derivative(point)) < epsilon and mode is False:
+                output_x.append(point)
+                output_y.append(self.F(point))
+                mode = True
+            else:
+                mode = False
+
+        return output_x, output_y
+
 

@@ -27,3 +27,5 @@ def get_derivative(function):
     x = Symbol("x")
     derivative = diff(sympify(function), x)
     return lambdify(x, derivative)
+
+
