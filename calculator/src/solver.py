@@ -1,5 +1,8 @@
 from math import sin, cos, tan, log2, log, e
 
+from numpy import arange
+
+from sympy import sympify, Derivative, Symbol
 EPS = 1e-8
 
 
@@ -96,16 +99,12 @@ class Arithmetics:
         return answer
 
 
-class Function(Arithmetics):
-    def __init__(self):
-        super().__init__()
-
-
-class Equation:
+class Equation(Arithmetics):
     def __init__(self, equation):
         self._base_equation = equation
 
-        self.solver = Arithmetics()
+        super().__init__()
+
         self._substituted = None
 
         self._left_bound = None
@@ -125,13 +124,32 @@ class Equation:
 
     def _find_value_of(self, value):
         self._substitute(value)
-        return self.solver.solve(equation=self._substituted)
+        return self.solve(equation=self._substituted)
 
     def F(self, x):
         return self._find_value_of(x)
 
-    def find_solution(self, left_bound, right_bound):
-        ...  # to be done
+    def _find_segments(self, left_bound, right_bound, simple_segment):
+        points_of_interest = []
+
+        segments = arange(left_bound, right_bound, simple_segment)
+        for i, current_segment in enumerate(segments):
+            curr_value = self._find_value_of(current_segment)
+            prev_value = self._find_value_of(segments[i - 1])
+
+            if curr_value * prev_value <= 0:
+                points_of_interest.append(((segments[i-1], prev_value), (current_segment, curr_value)))
+
+        return points_of_interest
+
+    @classmethod
+    def get_derivative(cls, function):
+        x = Symbol("x")
+        derivative = sympify(Derivative(sympify(function)))
+        print(derivative)
+
+    def find_solution(self, left_bound, right_bound, simple_segment, start_expression):
+        segments = self._find_segments(left_bound, right_bound, simple_segment)
 
 
 
