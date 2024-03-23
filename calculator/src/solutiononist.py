@@ -5,7 +5,7 @@ def iterate(x_k_1: float, point: tuple, eps, max_iter, func: callable, der: call
     code = 1
 
     x_k = point[0] - (point[1] / der(point[0]))
-    i = 0
+    i = 1
     try:
         while i < max_iter:
             alpha = -func(x_k) / der(x_k)
