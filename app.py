@@ -50,16 +50,26 @@ class App(Interface, CalculatorUI):
         self._parameters["maxIter"] = Filter.check_int(self.maxIterEdit.text(), "maxIterEdit")
 
     def _draw_table(self, solutions):
-        # self.solutionsList.setup(("№", "Отрезок", "x", "f(x)", "Итер.", "Ошибка"))
-        self.solutionsList.setColumnCount(6)
-        self.solutionsList.setHorizontalHeaderLabels(("№", "Отрезок", "x", "f(x)", "Итер.", "Ошибка"))
+
+        self.solutionsList.setColumnCount(5)
+        self.solutionsList.setHorizontalHeaderLabels(("Отрезок", "x", "f(x)", "Итер.", "Ошибка"))
+
+        self.solutionsList.setColumnWidth(0, self.solutionsList.SEGMENT_WIDTH)
+        self.solutionsList.setColumnWidth(1, self.solutionsList.FLOAT_WIDTH)
+        self.solutionsList.setColumnWidth(2, self.solutionsList.FLOAT_WIDTH)
+        self.solutionsList.setColumnWidth(3, self.solutionsList.INT_WIDTH)
+        self.solutionsList.setColumnWidth(4, self.solutionsList.INT_WIDTH)
+
         self.solutionsList.setRowCount(len(solutions))
+        self.solutionsList.setVerticalHeaderLabels([str(x) for x in range(1, len(solutions) + 1)])
 
         for row, solution in enumerate(solutions):
-            self.solutionsList.setItem(row, 0, QTableWidgetItem(f"{row + 1}"))
-            self.solutionsList.setItem(row, 1, QTableWidgetItem(solution[0]))
+            self.solutionsList.setItem(row, 0, QTableWidgetItem(solution[0]))
+            error =  solution[-1] > 0
             for col in range(1, 5):
-                self.solutionsList.setItem(row, col + 1, QTableWidgetItem(f"{solution[col]:g}"))
+                if error and 1 <= col <= 2:
+                    continue
+                self.solutionsList.setItem(row, col, QTableWidgetItem(f"{solution[col]:g}"))
 
     def _on_compute_pressed(self):
         self.solutionsList.clear()
