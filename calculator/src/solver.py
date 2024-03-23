@@ -49,7 +49,9 @@ class Arithmetics:
         elif abs(self._stack[-2]) <= EPS:
             self._stack[-2] = 0
         else:
-            sign = int(abs(self._stack[-2]) / self._stack[-2])
+            sign = 1
+            if self._stack[-1] % 2 != 0:
+                sign = int(abs(self._stack[-2]) / self._stack[-2])
             self._stack[-2] = abs(self._stack[-2]) ** self._stack[-1] * sign
         del self._stack[-1]
 
