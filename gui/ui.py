@@ -86,8 +86,6 @@ class CalculatorUI(QMainWindow):
 
         self._add_settings_box()
 
-        # self._add_plot_space()
-
         self.UI.addLayout(self.plotAndSettingsBox)
 
     def _add_settings_box(self):
@@ -188,5 +186,5 @@ class CalculatorUI(QMainWindow):
         self.epsLabel.setText(_translate("MainWindow", "Точность:"))
         self.epsEdit.setText(_translate("MainWindow", "eps"))
         self.computeButton.setText(_translate("MainWindow", "Вычислить"))
-        self.Menu.setText(_translate("MainWindow", "Меню"))
+        self.Menu.setText(_translate("MainWindow", "Справка"))
 

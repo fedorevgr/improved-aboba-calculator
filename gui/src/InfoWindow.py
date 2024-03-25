@@ -12,16 +12,23 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow
 
 
+INFO_TEXT = """
+Доступные математические функции: \n 
++, -, *, /, ^, \n
+sin, cos, tan, cot, log, ln, exp и унарный минус.\n
+Ошибки: \n0 - успешно, \t   1 - превышено кол-во операций, \n2 - деление на 0, \t   3 - вне отрезка"""
+
+
 class InfoUI(QMainWindow):
     def __init__(self):
         super().__init__()
 
         self.setObjectName("MainWindow")
-        self.resize(513, 310)
+        self.resize(513, 500)
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(20, 10, 481, 281))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(20, 10, 481, 480))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -63,4 +70,4 @@ class InfoUI(QMainWindow):
         self.Name.setText(_translate("MainWindow", 'ЛР 2 \n“Методы уточнения корней"'))
         self.Author.setText(_translate("MainWindow", "Автор: Евграфов Фёдор ИУ7-25Б"))
         self.Variant.setText(_translate("MainWindow", "Вариант - 8"))
-        self.Functions.setText(_translate("MainWindow", "Доступные математические функции:"))
+        self.Functions.setText(_translate("MainWindow", INFO_TEXT))

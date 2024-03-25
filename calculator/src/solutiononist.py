@@ -1,4 +1,4 @@
-from sympy import sympify, Derivative, Symbol, lambdify, diff
+from sympy import sympify, Symbol, lambdify, diff
 
 
 def iterate(x_k_1: float, point: tuple, eps, max_iter, func: callable, der: callable):
